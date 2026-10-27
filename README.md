@@ -1,12 +1,14 @@
 # Montessori Spiral
 
-An empty framework for Montessori education information supplied by contributors.
+An open project to help parents and educators understand the Montessori curriculum, practice supporting it, and keep a record of their own learning.
 
-No curriculum content, learner records, progress values, or institutional data is included.
+Start with the [design and handoff notes](docs/README.md). The design is organized around curriculum areas: Practical Life, Sensorial, Language, Mathematics, and cultural subjects. Simple explanations lead into deeper material, sources, adult side quests, and a learning ledger.
+
+**Current state:** design documents, literature findings, an empty curriculum data file, and tested privacy safeguards. The public app and ledger are planned, not implemented. No learner records, progress values, or institution-specific data are included.
 
 ## Structure
 
-`content/spiral.json` is the empty content repository. Add only generic educational material explicitly approved for public release. Keep personalized instances in separate private repositories.
+`content/spiral.json` remains empty until sourced curriculum entries have been reviewed. `docs/` records product, UX, data, security, and implementation decisions. `tests/` checks the privacy gate and documentation links. Keep personalized instances in separate private repositories.
 
 ## Required setup before any commit
 
@@ -15,6 +17,7 @@ Requires Git and Python 3.10 or newer.
 ```
 python tools/setup_privacy.py
 python tools/privacy_check.py --self-test
+python -m unittest discover -s tests -v
 git add .
 python tools/privacy_check.py
 git commit

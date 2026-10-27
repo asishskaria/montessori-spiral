@@ -1,0 +1,12 @@
+.env
+.env.*
+*.pdf
+*.csv
+*.xlsx
+*.docx
+*.png
+*.jpg
+*.jpeg
+private/
+imports/
+__pycache__/

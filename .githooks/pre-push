@@ -1,0 +1,13 @@
+#!/bin/sh
+privacy_python=$(git config --local --get privacy.python)
+if [ -n "$privacy_python" ]; then
+  exec "$privacy_python" tools/privacy_check.py --pre-push
+fi
+if command -v python >/dev/null 2>&1; then
+  exec python tools/privacy_check.py --pre-push
+elif command -v python3 >/dev/null 2>&1; then
+  exec python3 tools/privacy_check.py --pre-push
+else
+  echo "Privacy check requires Python. Push blocked." >&2
+  exit 1
+fi

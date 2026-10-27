@@ -1,0 +1,23 @@
+name: Privacy
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  check:
+    name: Privacy check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python tools/privacy_check.py --self-test
+      - name: Check current snapshot and reachable history
+        shell: bash
+        run: |
+          python tools/privacy_check.py --ref HEAD
+          while read -r revision; do
+            python tools/privacy_check.py --ref "$revision" || exit 1
+          done < <(git rev-list HEAD)
